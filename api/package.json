@@ -2,8 +2,8 @@
   "name": "api",
   "version": "1.0.0",
   "scripts": {
-    "install-dependencies": "node scripts/installDependencies.js",
-    "refresh-types": "node scripts/installDependencies.js --filePath='lambdas' --command='yarn refresh-types' --continueOnError=true",
+    "install-dependencies": "node scripts/recursiveCommand.js",
+    "refresh-types": "node scripts/recursiveCommand.js --filePath='lambdas' --command='yarn refresh-types' --continueOnError=true",
     "lint": "eslint --ext .js,.ts .",
     "format": "prettier --write lambdas",
     "start": ". .env && serverless offline --httpPort 5000",
