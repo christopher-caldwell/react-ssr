@@ -1,0 +1,62 @@
+service: api
+
+frameworkVersion: '>=2.0.0'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${env:STAGE}
+  stackName: ${env:STACK_NAME}
+  memorySize: 128
+  apiName: ${env:API_NAME}
+  timeout: 20
+  logRetentionInDays: 14
+  deploymentBucket:
+    name: ${env:S3_BUCKET}
+  tracing:
+    apiGateway: true
+    lambda: true
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    useChildProcesses: true
+  webpack:
+    webpackConfig: 'webpack/webpack.${env:WEBPACK_CONFIG}.js'
+    packager: 'yarn'
+    keepOutputDirectory: true
+
+package:
+  individually: true
+
+functions:
+  ReactSSR:
+    handler: lambdas/server/index.handler
+    name: DmlChallengeMainGraphQL-${env:STAGE}
+    description: Main GraphQL API
+    role: ReadWriteRole
+    events:
+      - http:
+          path: app
+          method: get
+          cors: true
+
+resources:
+  Description: API for DML AMP
+  Resources:
+    AuthRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+                  - edgelambda.amazonaws.com
+              Action: 'sts:AssumeRole'
+        ManagedPolicyArns:
+          - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole

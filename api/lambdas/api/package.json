@@ -1,0 +1,11 @@
+{
+  "name": "api",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.810.0",
+    "typescript": "^4.3.4"
+  }
+}
