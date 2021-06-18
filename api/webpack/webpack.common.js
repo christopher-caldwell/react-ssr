@@ -11,7 +11,7 @@ module.exports = {
     alias: {
       '@': path.resolve(process.cwd(), 'lambdas/'),
     },
-    extensions: ['.js', '.json', '.ts'],
+    extensions: ['.ts', '.tsx', '.json'],
   },
   target: 'node',
   plugins: [
@@ -31,6 +31,10 @@ module.exports = {
         options: {
           transpileOnly: true,
         },
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
