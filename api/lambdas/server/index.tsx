@@ -1,4 +1,5 @@
 import ReactDOMServer from 'react-dom/server'
+import { ServerStyleSheet } from 'styled-components'
 
 import App from './ui/src/App'
 
@@ -14,6 +15,7 @@ const indexFile = `
       content="Web site created using create-react-app"
     />
     <title>React App</title>
+    STYLED
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -22,11 +24,15 @@ const indexFile = `
   </body>
 </html>`
 
+const result = 'Hey Bitches!'
 export const handler = async () => {
   try {
-    const result = 'Hey Bitches!'
-    const app = ReactDOMServer.renderToString(<App message={result} />)
-    const html = indexFile.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
+    const sheets = new ServerStyleSheet()
+    const app = ReactDOMServer.renderToString(sheets.collectStyles(<App message={result} />))
+    const html = indexFile
+      .replace('<div id="root"></div>', `<div id="root">${app}</div>`)
+      .replace('STYLED', sheets.getStyleTags())
+    sheets.seal()
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'text/html' },

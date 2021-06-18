@@ -27,6 +27,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-promise": "^5.1.0",
     "googleapis": "^76.0.0",
+    "mini-css-extract-plugin": "^1.6.0",
     "prettier": "^2.2.1",
     "serverless": "^2.17.0",
     "serverless-offline": "6.8.0",

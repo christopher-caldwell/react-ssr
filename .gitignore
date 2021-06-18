@@ -9,7 +9,9 @@ node_modules
 /coverage
 
 # production
-/build
+build
+.webpack
+.serverless
 
 # misc
 .DS_Store
