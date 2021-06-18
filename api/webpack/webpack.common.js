@@ -2,7 +2,6 @@ const path = require('path')
 const serverlessWebpack = require('serverless-webpack')
 const webpack = require('webpack')
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   stats: 'minimal',
@@ -20,9 +19,6 @@ module.exports = {
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /date-fns$/,
     }),
-    new MiniCssExtractPlugin({
-      filename: 'styles.css',
-    }),
     // new BundleAnalyzerPlugin({
     //   analyzerMode: 'static',
     // }),
@@ -35,15 +31,6 @@ module.exports = {
         options: {
           transpileOnly: true,
         },
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          'css-loader',
-        ],
       },
     ],
   },

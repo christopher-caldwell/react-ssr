@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-function App({ message }: Props) {
+function App({ message = '' }: Props) {
   return (
     <div className="App">
       <header className="App-header">
@@ -18,7 +18,7 @@ function App({ message }: Props) {
 const GreenText = styled.p`color: green;`
 
 interface Props {
-  message: string
+  message?: string
 }
 
 export default App
