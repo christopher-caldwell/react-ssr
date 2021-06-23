@@ -15,7 +15,9 @@ function App({ message = '' }: Props) {
   )
 }
 
-const GreenText = styled.p`color: green;`
+const GreenText = styled.p`
+  color: green;
+`
 
 interface Props {
   message?: string

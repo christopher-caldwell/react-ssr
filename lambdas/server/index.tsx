@@ -1,7 +1,7 @@
 import ReactDOMServer from 'react-dom/server'
 import { ServerStyleSheet } from 'styled-components'
 
-import App from './ui/src/App'
+import App from './ui/App'
 
 const indexFile = `
 <!DOCTYPE html>
